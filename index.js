@@ -14,7 +14,11 @@ module.exports = function md_align_plugin(md, options) {
             render: function (tokens, idx) {
                 if (tokens[idx].nesting === 1) {
                     containerOpenCount += 1;
-                    return '<div class="is-pulled-' + name + '">\n';
+                    if (name == 'center'){
+                        return '<div class="is-half is-offset-one-quarter' + name + '">\n';
+                    } else {
+                        return '<div class="is-5 is-pulled-' + name + '">\n';
+                    }
                 } else {
                     containerOpenCount -= 1;
                     return '</div>\n';
