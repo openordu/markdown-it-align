@@ -2,22 +2,22 @@
 
 var container = require('markdown-it-container');
 
-module.exports = function md_tip_plugin(md, options) {
+module.exports = function md_align_plugin(md, options) {
 	var containerOpenCount = 0;
 	var links = options ? options.links : true;
 	init();
 	return;
 	
 	function setupContainer(name) { 
+        console.log(name)
         md.use(container, name, {
             render: function (tokens, idx) {
                 if (tokens[idx].nesting === 1) {
                     containerOpenCount += 1;
-                    return '<article class="message is-' + name + '">\n' +
-                    '<div class="message-header">' + name[0].toUpperCase() + name.substring(1) + '</div><div class="message-body">';
+                    return '<div class="is-pulled-' + name + '">\n';
                 } else {
                     containerOpenCount -= 1;
-                    return '</div>\n</article>';
+                    return '</div>\n';
                 }
             }
         });
@@ -36,7 +36,7 @@ module.exports = function md_tip_plugin(md, options) {
 		
 		md.renderer.rules.link_open = function (tokens, idx, options, env, self) {
 			if (isContainerOpen()) {
-				tokens[idx].attrPush(['class', 'md-tip-link']);
+				tokens[idx].attrPush(['class', 'md-align-link']);
 			}
 			
 			return defaultRender(tokens, idx, options, env, self);
@@ -44,12 +44,12 @@ module.exports = function md_tip_plugin(md, options) {
 	}
 	
 	function init() {
-        setupContainer('success');
-        setupContainer('info');
-        setupContainer('warning');
-        setupContainer('danger');
-        setupContainer('error');
-        setupContainer('tip');
+        // setupContainer('success');
+        // setupContainer('info');
+        // setupContainer('warning');
+        setupContainer('right');
+        setupContainer('left');
+        setupContainer('center');
 		
 		if (links) {
 			setupLinks();
