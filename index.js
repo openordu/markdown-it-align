@@ -14,13 +14,13 @@ module.exports = function md_align_plugin(md, options) {
                 if (tokens[idx].nesting === 1) {
                     containerOpenCount += 1;
                     if (name == 'center'){
-                        return '<div class="is-half is-offset-one-quarter">\n';
+                        return '<div class="columns is-mobile"><div class="is-half is-offset-one-quarter">\n';
                     } else {
-                        return '<div class="is-5 is-pulled-' + name + '">\n';
+                        return '<div class="columns is-mobile"><div class="is-5 is-pulled-' + name + '">\n';
                     }
                 } else {
                     containerOpenCount -= 1;
-                    return '</div>\n';
+                    return '</div>\n</div>';
                 }
             }
         });
