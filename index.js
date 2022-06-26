@@ -9,13 +9,12 @@ module.exports = function md_align_plugin(md, options) {
 	return;
 	
 	function setupContainer(name) { 
-        console.log(name)
         md.use(container, name, {
             render: function (tokens, idx) {
                 if (tokens[idx].nesting === 1) {
                     containerOpenCount += 1;
                     if (name == 'center'){
-                        return '<div class="is-half is-offset-one-quarter' + name + '">\n';
+                        return '<div class="is-half is-offset-one-quarter">\n';
                     } else {
                         return '<div class="is-5 is-pulled-' + name + '">\n';
                     }
@@ -48,9 +47,7 @@ module.exports = function md_align_plugin(md, options) {
 	}
 	
 	function init() {
-        // setupContainer('success');
-        // setupContainer('info');
-        // setupContainer('warning');
+
         setupContainer('right');
         setupContainer('left');
         setupContainer('center');
